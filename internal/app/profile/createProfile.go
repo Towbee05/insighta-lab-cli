@@ -1,7 +1,6 @@
 package profile
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,8 +9,9 @@ import (
 	"github.com/towbee05/insighta/pkg/utils"
 )
 
+var BASE_URL string = "http://localhost:8000/api/profiles/"
+
 func CreateProfile(name string) error {
-	fmt.Println(name)
 	token, tokenErr := utils.CheckTokenFileExistence()
 	if tokenErr != nil {
 		return fmt.Errorf("an error occured generating token: %s \n", tokenErr)
@@ -23,22 +23,11 @@ func CreateProfile(name string) error {
 	if marshalledErr != nil {
 		return fmt.Errorf("failed to marshal data: %s", marshalledErr)
 	}
-	request, requestErr := http.NewRequest("POST", "http://localhost:8000/api/profiles/", bytes.NewBuffer(marshalledData))
-	if requestErr != nil {
-		return fmt.Errorf("An error occured sending request: %s \n", requestErr)
+
+	response, respErr := utils.MakePostRequest(BASE_URL, *token, marshalledData)
+	if respErr != nil {
+		return fmt.Errorf("%s", respErr)
 	}
-
-	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token.AccessToken))
-	request.Header.Add("X-API-Version", "1")
-	request.Header.Add("Content-Type", "application/json")
-
-	client := http.Client{}
-	response, responseErr := client.Do(request)
-	if responseErr != nil {
-		return fmt.Errorf("An error occured getting response: %s \n", responseErr)
-	}
-
-	defer response.Body.Close()
 	fmt.Println(response.StatusCode)
 
 	switch response.StatusCode {
