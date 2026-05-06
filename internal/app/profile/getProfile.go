@@ -14,7 +14,7 @@ func GetProfile(id uuid.UUID) error {
 	if tokenErr != nil {
 		return fmt.Errorf("an error occured generating token: %s \n", tokenErr)
 	}
-	var url string = fmt.Sprintf("%s%s", BASE_URL, id)
+	var url string = fmt.Sprintf("%s/%s", BASE_URL, id)
 
 	response, respErr := utils.MakeGetRequest(url, *token)
 	if respErr != nil {

@@ -9,7 +9,7 @@ import (
 	"github.com/towbee05/insighta/pkg/utils"
 )
 
-var BASE_URL string = "http://localhost:8000/api/profiles/"
+var BASE_URL string = "http://localhost:8000/api/profiles"
 
 func CreateProfile(name string) error {
 	token, tokenErr := utils.CheckTokenFileExistence()
