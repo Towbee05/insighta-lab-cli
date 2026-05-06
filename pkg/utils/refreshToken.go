@@ -18,7 +18,8 @@ func RefreshToken(refreshToken string) (*myTypes.Token, error) {
 	if marshalErr != nil {
 		return nil, fmt.Errorf("failed to convert body to byte %w", marshalErr)
 	}
-	request, requestErr := http.NewRequest("POST", "http://localhost:8000/auth/refresh", bytes.NewBuffer(marshalledData))
+	url := "http://localhost:8000/auth/refresh"
+	request, requestErr := http.NewRequest("POST", url, bytes.NewBuffer(marshalledData))
 	if requestErr != nil {
 		return nil, fmt.Errorf("Could not request for new token: %w", requestErr)
 	}
