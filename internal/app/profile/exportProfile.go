@@ -50,7 +50,7 @@ func ExportProfile(filters myTypes.ExportFilters) error {
 		}
 		filename = fmt.Sprintf("profile.%s", filters.Format)
 
-		file, createFileErr := os.Create(filename, 0600)
+		file, createFileErr := os.Create(filename)
 		if createFileErr != nil {
 			return fmt.Errorf("failed to create file: %s", createFileErr)
 		}
