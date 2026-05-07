@@ -11,7 +11,8 @@ import (
 )
 
 func Login() error {
-	response, err := http.Get("http://localhost:8000/auth/github")
+	var GithubURL string = "http://localhost:8000/auth/github"
+	response, err := http.Get(GithubURL)
 	if err != nil {
 		return fmt.Errorf("error fetching authentication endpoint: %w", err)
 	}
