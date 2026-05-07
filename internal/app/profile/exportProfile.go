@@ -23,6 +23,7 @@ func ExportProfile(filters myTypes.ExportFilters) error {
 	if respErr != nil {
 		return fmt.Errorf("%s", respErr)
 	}
+	defer response.Body.Close()
 
 	switch response.StatusCode {
 	case http.StatusOK:
@@ -63,5 +64,6 @@ func ExportProfile(filters myTypes.ExportFilters) error {
 		fmt.Println(respData)
 		return fmt.Errorf(" ✖️✖️ Server returned error of status: %d, and message: %s \n", respData.Status, respData.Message)
 	}
+	fmt.Println("✅✅ Successfully exported data ...")
 	return nil
 }

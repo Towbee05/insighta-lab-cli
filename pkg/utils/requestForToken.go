@@ -9,7 +9,7 @@ import (
 )
 
 func RequestForToken(state string) (*myTypes.PolledResult, error) {
-	url := fmt.Sprintf("http://localhost:8000/auth/github/poll?state=%s", state)
+	url := fmt.Sprintf("https://hng-stage-1-eight-tan.vercel.app/auth/github/poll?state=%s", state)
 
 	response, err := http.Get(url)
 

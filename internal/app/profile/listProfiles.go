@@ -16,11 +16,13 @@ func ListResponse(filters myTypes.Filters) error {
 
 	params := utils.BuildQueryParams(filters)
 	url := fmt.Sprintf("%s?%s", BASE_URL, params)
+	fmt.Println(url)
 	response, respErr := utils.MakeGetRequest(url, *token)
 	if respErr != nil {
 		return fmt.Errorf("%s", respErr)
 	}
 	fmt.Println(response.StatusCode)
+	defer response.Body.Close()
 
 	switch response.StatusCode {
 	case http.StatusOK:

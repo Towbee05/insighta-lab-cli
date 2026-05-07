@@ -24,6 +24,6 @@ func MakePostRequest(url string, token myTypes.Token, body []byte) (*http.Respon
 		return nil, fmt.Errorf("An error occured getting response: %s \n", responseErr)
 	}
 
-	defer response.Body.Close()
+	// defer response.Body.Close()
 	return response, nil
 }

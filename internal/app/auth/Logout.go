@@ -18,5 +18,6 @@ func Logout() error {
 	if err := os.Remove(tokenDir); err != nil {
 		return fmt.Errorf("An error occured writting into token dir: %s", err)
 	}
+	fmt.Println("Successfully Logged out...")
 	return nil
 }

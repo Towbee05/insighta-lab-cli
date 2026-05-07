@@ -11,7 +11,7 @@ import (
 )
 
 func Login() error {
-	var GithubURL string = "http://localhost:8000/auth/github"
+	var GithubURL string = "https://hng-stage-1-eight-tan.vercel.app/auth/github"
 	response, err := http.Get(GithubURL)
 	if err != nil {
 		return fmt.Errorf("error fetching authentication endpoint: %w", err)
@@ -23,15 +23,14 @@ func Login() error {
 		return fmt.Errorf("An error occured. Unexpected status %d", response.StatusCode)
 	}
 
-	// Create a  dict "data" of key "string" and value "string"
 	var data myTypes.GithubAuthData
-	// Decode response body (it is in byte of data) into  readable hash map format
 	if err := json.NewDecoder(response.Body).Decode(&data); err != nil {
 		return fmt.Errorf("error decoding authentication data: %w", err)
 	}
 
 	authentication_url := data.Authentication_url
 	state := data.State
+	fmt.Println(authentication_url)
 
 	browser.OpenURL(authentication_url)
 
