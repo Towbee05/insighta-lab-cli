@@ -20,6 +20,7 @@ func GetProfile(id uuid.UUID) error {
 	if respErr != nil {
 		return fmt.Errorf("%s", respErr)
 	}
+	defer response.Body.Close()
 
 	switch response.StatusCode {
 	case http.StatusOK:
